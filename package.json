@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec babel-node ./bin/www",
-    "prestart": "babel src --out-dir dist",
     "start": "node ./dist/bin/www"
   },
   "dependencies": {
