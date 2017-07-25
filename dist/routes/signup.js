@@ -12,10 +12,6 @@ var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
 
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
 var _uuidV = require('uuid-v4');
 
 var _uuidV2 = _interopRequireDefault(_uuidV);
@@ -24,10 +20,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 
-var getFilePath = function getFilePath() {
-  return _path2.default.join(__dirname, 'data') + '.json';
-};
-
 var fileParse = function fileParse() {
   return JSON.parse(_fs2.default.readFileSync('data.json', { encoding: 'utf-8' }));
 };
@@ -35,10 +27,6 @@ var fileParse = function fileParse() {
 var updateFile = function updateFile(data) {
   _fs2.default.writeFileSync('data.json', JSON.stringify(data, null, 2), { encoding: 'utf-8' });
 };
-
-router.get('/', function (req, res, next) {
-  res.render('index');
-});
 
 router.post('/', function (req, res, next) {
   try {

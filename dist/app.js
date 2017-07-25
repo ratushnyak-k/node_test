@@ -40,6 +40,10 @@ var _signup = require('./routes/signup');
 
 var _signup2 = _interopRequireDefault(_signup);
 
+var _signin = require('./routes/signin');
+
+var _signin2 = _interopRequireDefault(_signin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -58,6 +62,7 @@ app.use((0, _cookieParser2.default)());
 app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
 app.use('/', _index2.default);
 app.use('/signup', _signup2.default);
+app.use('/signin', _signin2.default);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
