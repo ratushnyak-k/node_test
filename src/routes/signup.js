@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import uuid from 'uuid-v4';
 const router = express.Router();
 
 const getFilePath = () => {
@@ -26,21 +27,23 @@ router.post('/', (req, res, next) => {
 
     requestData.email = requestData.email.toLowerCase().trim();
 
-    const checkUserEmailExist = data.users.filter((user) => {
-      return user.email === requestData.email;
+    const checkUserEmailExist = Object.keys(data.users).filter((user) => {
+      return data.users[user].email === requestData.email;
     });
 
     if (checkUserEmailExist.length) {
       res.status(400);
       res.send('This email already exist');
     } else {
-      data.users.push(requestData);
+      requestData.id = uuid();
+      data.users[requestData.id] = requestData;
       updateFile(data);
+      res.send(requestData);
     }
     res.end();
   } catch (err) {
     console.log(err);
   }
-})
+});
 
 export default router;

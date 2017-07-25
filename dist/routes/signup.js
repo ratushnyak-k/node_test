@@ -16,6 +16,10 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
+var _uuidV = require('uuid-v4');
+
+var _uuidV2 = _interopRequireDefault(_uuidV);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express2.default.Router();
@@ -43,16 +47,18 @@ router.post('/', function (req, res, next) {
 
     requestData.email = requestData.email.toLowerCase().trim();
 
-    var checkUserEmailExist = data.users.filter(function (user) {
-      return user.email === requestData.email;
+    var checkUserEmailExist = Object.keys(data.users).filter(function (user) {
+      return data.users[user].email === requestData.email;
     });
 
     if (checkUserEmailExist.length) {
       res.status(400);
       res.send('This email already exist');
     } else {
-      data.users.push(requestData);
+      requestData.id = (0, _uuidV2.default)();
+      data.users[requestData.id] = requestData;
       updateFile(data);
+      res.send(requestData);
     }
     res.end();
   } catch (err) {

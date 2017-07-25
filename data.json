@@ -1,12 +1,5 @@
 {
-  "users": [
-    {
-      "email": "example@email.com",
-      "password": "123456"
-    },
-    {
-      "email": "sddddrgsasodf",
-      "password": "343"
-    }
-  ]
+  "users": {
+
+  }
 }
