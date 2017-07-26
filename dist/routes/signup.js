@@ -42,9 +42,7 @@ router.post('/', function (req, res, next) {
     if (checkUserEmailExist.length) {
       res.status(400);
       res.send({
-        errors: {
-          email: 'This email already exist'
-        }
+        email: ['This email already exist']
       });
     } else {
       requestData.id = (0, _uuidV2.default)();
