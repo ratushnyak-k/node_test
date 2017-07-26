@@ -22,10 +22,22 @@ var fileParse = function fileParse() {
 
 router.get('/', function (req, res, next) {
   var data = fileParse();
-  if (data.users[req.query.id]) {
-    res.send(data.users[req.query.id]);
+  console.log(req.query);
+  var checkOnExistingEmail = Object.keys(data.users).filter(function (user) {
+    return data.users[user].email === req.query.email;
+  });
+  if (checkOnExistingEmail.length) {
+    if (data.users[checkOnExistingEmail[0]].password === req.query.password) {
+      res.send(data.users[checkOnExistingEmail[0]]);
+    } else {
+      res.status(400);
+      res.send({
+        email: ['Incorrect email or password'],
+        password: ['Incorrect email or password']
+      });
+    }
   } else {
-    res.send({ message: 'Not found' });
+    res.send({ email: ['There\'s no users registered with this email'] });
     res.status(404);
   }
   res.end();
