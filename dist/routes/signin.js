@@ -37,8 +37,8 @@ router.post('/', function (req, res, next) {
       });
     }
   } else {
-    res.send({ email: ['There\'s no users registered with this email'] });
     res.status(404);
+    res.send({ email: ['There\'s no users registered with this email'] });
   }
   res.end();
 });
