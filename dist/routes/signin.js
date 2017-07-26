@@ -20,7 +20,7 @@ var fileParse = function fileParse() {
   return JSON.parse(_fs2.default.readFileSync('data.json', { encoding: 'utf-8' }));
 };
 
-router.get('/', function (req, res, next) {
+router.post('/', function (req, res, next) {
   var data = fileParse();
   console.log(req.query);
   var checkOnExistingEmail = Object.keys(data.users).filter(function (user) {
