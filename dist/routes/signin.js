@@ -24,7 +24,7 @@ router.post('/', function (req, res, next) {
   var data = fileParse();
   console.log(req.query);
   var checkOnExistingEmail = Object.keys(data.users).filter(function (user) {
-    return data.users[user].email === req.query.email;
+    return data.users[user].email === req.query.email.toLowerCase().trim();
   });
   if (checkOnExistingEmail.length) {
     if (data.users[checkOnExistingEmail[0]].password === req.query.password) {
