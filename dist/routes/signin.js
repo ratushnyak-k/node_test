@@ -22,12 +22,12 @@ var fileParse = function fileParse() {
 
 router.post('/', function (req, res, next) {
   var data = fileParse();
-  console.log(req.query);
+  console.log(req);
   var checkOnExistingEmail = Object.keys(data.users).filter(function (user) {
-    return data.users[user].email === req.query.email.toLowerCase().trim();
+    return data.users[user].email === req.body.email.toLowerCase().trim();
   });
   if (checkOnExistingEmail.length) {
-    if (data.users[checkOnExistingEmail[0]].password === req.query.password) {
+    if (data.users[checkOnExistingEmail[0]].password === req.body.password) {
       res.send(data.users[checkOnExistingEmail[0]]);
     } else {
       res.status(400);
